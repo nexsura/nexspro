@@ -1,0 +1,46 @@
+# Ruby / Rails
+*.gem
+*.rbc
+.bundle/
+vendor/bundle/
+log/*
+tmp/*
+!log/.keep
+!tmp/.keep
+
+# Database
+db/*.sqlite3
+db/*.sqlite3-journal
+
+# Secrets / Env
+/config/master.key
+/config/*.key
+.env*
+
+# Docker / Dev Container
+.vscode-server/
+.devcontainer/.cache/
+.cache/
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Storage / uploads
+storage/*
+!storage/.keep
+
+# Assets
+public/assets
+
+# Debug / Logs
+*.log
+.byebug_history
+
+# Tests / Coverage
+coverage/
+
+# OS
+.DS_Store
+Thumbs.db
