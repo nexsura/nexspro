@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "@modelcontextprotocol/ext-apps": "0.4.1",
+    "@fortawesome/fontawesome-svg-core": "7.2.0",
+    "@fortawesome/react-fontawesome": "3.3.0",
+    "@fortawesome/pro-regular-svg-icons": "7.2.0",
+    "@fortawesome/pro-solid-svg-icons": "7.2.0"
+  },
+  "bundleHash": "aec1d2f7b7413aff",
+  "version": "5d8527e4c8605708"
+}
