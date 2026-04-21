@@ -8,7 +8,7 @@ module Views
       def view_template(&content)
         doctype
 
-        html lang: "fr" do
+        html lang: "en" do
           head do
             meta charset: "utf-8"
             title { page_title }
@@ -22,10 +22,10 @@ module Views
             csp_meta_tag
 
             favicon_links
-            stylesheet_link_tag "application"
+            stylesheet_link_tag "tailwind"
           end
 
-          body class: "layout-body" do
+          body class: "layout-body dark" do
             render Views::Components::Shared::SkipToContent.new
             render Views::Components::Navigation::Navbar.new
 

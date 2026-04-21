@@ -13,7 +13,7 @@ module Views
     end
 
     def page_info
-      { title: page_title  }
+      { title: page_title }
     end
 
     def page_title
