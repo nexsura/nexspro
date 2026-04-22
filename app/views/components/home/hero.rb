@@ -5,16 +5,30 @@ module Views
     module Home
       class Hero < Views::Components::Base
         def view_template
-          section class: "relative min-h-screen bg-[--color-background]" do
-            div class: "flex min-h-screen items-center justify-center -translate-y-6" do
-              h1 class: "text-[clamp(5rem,12vw,10rem)] font-light tracking-[0.22em] text-[--color-foreground]" do
+          section class: "relative min-h-screen overflow-hidden bg-[var(--background)]" do
+            div class: "flex min-h-screen items-center justify-center -translate-y-8" do
+              h1 class: "hero text-[clamp(5rem,12vw,10rem)] font-light tracking-[0.22em]" do
                 "NEXSPRO"
               end
             end
 
-            div class: "absolute bottom-10 left-1/2 -translate-x-1/2 text-sm text-[--color-foreground]/70" do
-              "Scroll ↓"
+            scroll_indicator
+          end
+        end
+
+        private
+
+        def scroll_indicator
+          a href: "#studio",
+            class: "group absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-[10px] font-light uppercase tracking-[0.28em] text-[var(--foreground)] transition-colors duration-100 hover:text-[var(--accent)]" do
+
+            span do
+              "Scroll"
             end
+
+            img src: "/chevron.svg",
+                alt: "",
+                class: "animate-chevron h-[11px] w-[18px] opacity-85 transition-opacity duration-100 group-hover:opacity-100"
           end
         end
       end
