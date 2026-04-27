@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Views
   module Layouts
     class ApplicationLayout < Views::Components::Base
@@ -41,8 +43,8 @@ module Views
       end
 
       def favicon_links
-        link rel: "icon", href: "/icon.png", type: "image/png"
         link rel: "icon", href: "/icon.svg", type: "image/svg+xml"
+        link rel: "icon", href: "/icon.png", type: "image/png"
         link rel: "apple-touch-icon", href: "/icon.png"
         link rel: "manifest", href: "/manifest.json"
       end
