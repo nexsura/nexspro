@@ -5,9 +5,9 @@ module Views
     module Home
       class Hero < Views::Components::Base
         def view_template
-          section class: "relative min-h-screen overflow-hidden bg-[var(--background)]" do
+          section class: "relative min-h-screen overflow-hidden bg-(--background)" do
             div class: "flex min-h-screen items-center justify-center -translate-y-8" do
-              h1 class: "hero text-[clamp(5rem,12vw,10rem)] font-light tracking-[0.22em]" do
+              h1 class: "hero select-none cursor-default text-[clamp(5rem,12vw,10rem)] font-light tracking-[0.22em]" do
                 "NEXSPRO"
               end
             end
@@ -20,7 +20,7 @@ module Views
 
         def scroll_indicator
           a href: "#studio",
-            class: "group absolute bottom-10 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-[10px] font-light uppercase tracking-[0.28em] text-[var(--foreground)] transition-colors duration-100 hover:text-[var(--accent)]" do
+            class: "group absolute bottom-10 left-1/2 flex -translate-x-1/2 select-none cursor-default flex-col items-center gap-2 text-[10px] font-light uppercase tracking-[0.28em] text-[var(--foreground)] transition-colors duration-100 hover:text-[var(--accent)]" do
 
             span do
               "Scroll"
