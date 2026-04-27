@@ -7,8 +7,7 @@ module Views
         def view_template
           header class: "absolute inset-x-0 top-0 z-50 px-8 py-6 lg:px-10" do
             nav class: "flex w-full items-center justify-end",
-              aria: { label: "Main navigation" } do
-
+                aria: { label: "Main navigation" } do
               ul class: "flex items-center gap-6 lg:gap-8" do
                 nav_item "Studio", "#studio"
                 nav_item "Streaming", "#streaming"
@@ -31,10 +30,10 @@ module Views
           li do
           a href: href,
             class: "group relative inline-flex items-center py-1 text-[12px] font-light uppercase tracking-[0.28em] text-[var(--foreground-soft)] transition-all duration-300 hover:text-[var(--accent)]" do
-          plain label
+            plain label
 
-          span class: "absolute -bottom-1 left-0 h-px w-0 bg-[var(--accent-line)] transition-all duration-300 group-hover:w-full",
-               aria: { hidden: true }
+            span class: "absolute -bottom-1 left-0 h-px w-0 bg-[var(--accent-line)] transition-all duration-300 group-hover:w-full",
+                 aria: { hidden: true }
             end
           end
         end
