@@ -9,7 +9,7 @@ module Views
     end
 
     private
-    
+
     def layout
       Views::Layouts::ApplicationLayout
     end
