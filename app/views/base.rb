@@ -8,6 +8,8 @@ module Views
       end
     end
 
+    private
+
     def layout
       Views::Layouts::ApplicationLayout
     end

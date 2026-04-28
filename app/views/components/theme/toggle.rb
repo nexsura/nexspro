@@ -15,7 +15,6 @@ module Views
               label: "Toggle theme",
               pressed: @dark.to_s
             } do
-
             img src: icon_path,
               alt: "",
               class: "h-[16px] w-[16px]"
