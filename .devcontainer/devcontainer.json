@@ -3,5 +3,12 @@
   "dockerComposeFile": ["../compose.yaml"],
   "service": "app",
   "workspaceFolder": "/app",
-  "shutdownAction": "stopCompose"
+  "shutdownAction": "stopCompose",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Shopify.ruby-lsp"
+      ]
+    }
+  }
 }

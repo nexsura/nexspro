@@ -1,19 +1,25 @@
 # frozen_string_literal: true
 
-class Views::Base < Components::Base
-  def page_title
-    "Nexspro"
-  end
+module Views
+  class Base < Views::Components::Base
+    def around_template
+      render layout.new(page_info: page_info) do
+        super
+      end
+    end
 
-  def page_info
-    { title: page_title }
-  end
+    private
 
-  def around_template(&content)
-    render Components::Layout.new(page_info) do
-      super(&content)
+    def layout
+      Views::Layouts::ApplicationLayout
+    end
+
+    def page_info
+      { title: page_title }
+    end
+
+    def page_title
+      "Nexspro"
     end
   end
-  
-  def cache_store = Rails.cache
 end

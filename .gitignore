@@ -44,3 +44,7 @@ coverage/
 # OS
 .DS_Store
 Thumbs.db
+.dotnet/
+.gitconfig
+/app/assets/builds/*
+!/app/assets/builds/.keep
