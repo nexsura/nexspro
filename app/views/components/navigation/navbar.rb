@@ -27,40 +27,40 @@ module Views
 
         def studio_item
           dropdown_item("Studio", width: "min-w-32") do
-            sub_nav_item "Work", "#studio-work"
-            sub_nav_item "Profile", "#studio-profile"
-            sub_nav_item "Contact", "#studio-contact"
+            sub_nav_item "Work", helpers.studio_work_path
+            sub_nav_item "Profile", helpers.studio_profile_path
+            sub_nav_item "Contact", helpers.studio_contact_path
           end
         end
 
         def streaming_item
           dropdown_item("Streaming", width: "min-w-36") do
-            sub_nav_item "Live", "#streaming-live"
-            sub_nav_item "Setup", "#streaming-setup"
-            sub_nav_item "Highlights", "#streaming-highlights"
+            sub_nav_item "Live", helpers.streaming_live_path
+            sub_nav_item "Setup", helpers.streaming_setup_path
+            sub_nav_item "Highlights", helpers.streaming_highlights_path
           end
         end
 
         def gaming_item
           dropdown_item("Gaming", width: "min-w-40") do
-            sub_nav_item "Games", "#gaming-games"
-            sub_nav_item "Builds", "#gaming-builds"
-            sub_nav_item "Competition", "#gaming-competition"
+            sub_nav_item "Games", helpers.gaming_games_path
+            sub_nav_item "Builds", helpers.gaming_builds_path
+            sub_nav_item "Competition", helpers.gaming_competition_path
           end
         end
 
         def library_item
           dropdown_item("Library", width: "min-w-40") do
-            sub_nav_item "Books", "#library-books"
-            sub_nav_item "Guides", "#library-guides"
-            sub_nav_item "Resources", "#library-resources"
+            sub_nav_item "Books", helpers.library_books_path
+            sub_nav_item "Guides", helpers.library_guides_path
+            sub_nav_item "Resources", helpers.library_resources_path
           end
         end
 
         def connect_item
           dropdown_item("Connect", width: "min-w-40") do
-            sub_nav_item "Socials", "#connect-socials"
-            sub_nav_item "Community", "#connect-community"
+            sub_nav_item "Socials", helpers.connect_socials_path
+            sub_nav_item "Community", helpers.connect_community_path
           end
         end
 

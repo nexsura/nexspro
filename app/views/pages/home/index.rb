@@ -11,7 +11,6 @@ module Views
         def view_template
           section class: "home-page" do
             render Views::Components::Home::Hero.new
-            render Views::Components::Studio::Section.new
           end
         end
       end
