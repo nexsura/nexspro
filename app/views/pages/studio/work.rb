@@ -9,7 +9,7 @@ module Views
         end
 
         def view_template
-          section id: "connect-work",
+          section id: "studio-work",
             class: "min-h-screen bg-(--background) px-8 py-32" do
             h1 class: "text-(--text-title-size) font-light tracking-tight" do
               plain "Work"
