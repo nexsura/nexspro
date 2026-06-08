@@ -174,4 +174,23 @@
         animation: chevron-bounce 2.2s var(--ease-soft) infinite;
         will-change: transform, opacity;
     }
+
+    html,
+    body,
+    body * {
+        cursor: url("/cursors/pointer.cur") 4 4, auto !important;
+    }
+
+    a,
+    button,
+    summary,
+    [role="button"] {
+        cursor: url("/cursors/link.cur") 4 4, pointer !important;
+    }
+
+    input,
+    textarea,
+    select {
+        cursor: url("/cursors/text.cur") 4 12, text !important;
+    }
 }

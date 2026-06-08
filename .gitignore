@@ -1,50 +1,186 @@
-# Ruby / Rails
+# -----------------------------------------------------------------------------
+# Ruby / Bundler / Rails
+# -----------------------------------------------------------------------------
 *.gem
 *.rbc
-.bundle/
-vendor/bundle/
-log/*
-tmp/*
-!log/.keep
-!tmp/.keep
 
-# Database
-db/*.sqlite3
-db/*.sqlite3-journal
+/.bundle/
+/.bundle/config
+/vendor/bundle/
 
-# Secrets / Env
-/config/master.key
-/config/*.key
-.env*
+# Rails logs / tmp / cache
+/log/*
+!/log/.keep
 
-# Docker / Dev Container
-.vscode-server/
-.devcontainer/.cache/
-.cache/
+/tmp/*
+!/tmp/.keep
 
-# VS Code
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
+/storage/*
+!/storage/.keep
 
-# Storage / uploads
-storage/*
-!storage/.keep
-
-# Assets
-public/assets
-
-# Debug / Logs
 *.log
-.byebug_history
+*.pid
+*.pid.lock
 
-# Tests / Coverage
-coverage/
+# Bootsnap / Rails local cache
+/tmp/cache/
+/tmp/pids/
+/tmp/sockets/
+/tmp/storage/
+/tmp/caching-dev.txt
 
-# OS
-.DS_Store
-Thumbs.db
-.dotnet/
-.gitconfig
+# -----------------------------------------------------------------------------
+# Rails credentials / secrets
+# -----------------------------------------------------------------------------
+/config/master.key
+/config/credentials/*.key
+/config/secrets.yml
+/config/*.key
+
+# Keep encrypted credentials committed:
+# /config/credentials.yml.enc
+
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Local Rails config overrides
+/config/database.local.yml
+/config/cable.local.yml
+/config/storage.local.yml
+/config/cache.local.yml
+/config/queue.local.yml
+/config/recurring.local.yml
+/config/deploy*.local.yml
+
+# -----------------------------------------------------------------------------
+# Database / dumps / backups
+# -----------------------------------------------------------------------------
+db/*.sqlite3
+db/*.sqlite3-*
+*.sqlite3
+*.sqlite3-*
+
+*.sql
+*.sql.gz
+*.dump
+*.pgdump
+*.backup
+*.bak
+
+# -----------------------------------------------------------------------------
+# Assets / frontend generated files
+# -----------------------------------------------------------------------------
+/public/assets/
 /app/assets/builds/*
 !/app/assets/builds/.keep
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# -----------------------------------------------------------------------------
+# Tests / coverage / security reports
+# -----------------------------------------------------------------------------
+/coverage/
+.rspec_status
+.byebug_history
+
+/tmp/screenshots/
+/tmp/capybara/
+
+/test/reports/
+/spec/reports/
+
+brakeman.html
+brakeman.json
+bundler-audit.log
+
+# -----------------------------------------------------------------------------
+# Docker / local compose overrides
+# -----------------------------------------------------------------------------
+.docker/
+/.devcontainer/.cache/
+
+compose.override.yml
+compose.override.yaml
+compose.local.yml
+compose.local.yaml
+docker-compose.override.yml
+docker-compose.override.yaml
+
+/postgres_data/
+/redis_data/
+
+# -----------------------------------------------------------------------------
+# Local tools / assistants / editors
+# -----------------------------------------------------------------------------
+/.codex/
+/.agents/
+
+/.local/
+/.config/
+/.cache/
+/.dotnet/
+/.vscode-server/
+/.ruby-lsp/
+/.solargraph/
+
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+.history/
+
+.gitconfig
+.git-credentials
+
+# -----------------------------------------------------------------------------
+# Keys / certificates / private material
+# -----------------------------------------------------------------------------
+*.pem
+*.key
+*.crt
+*.cer
+*.csr
+*.p12
+*.pfx
+*.p8
+*.jks
+*.keystore
+*.gpg
+*.age
+
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+
+# -----------------------------------------------------------------------------
+# Archives that may contain exports, dumps, credentials, uploads
+# -----------------------------------------------------------------------------
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+*.rar
+
+# -----------------------------------------------------------------------------
+# OS files
+# -----------------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.directory

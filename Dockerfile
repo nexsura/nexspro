@@ -2,7 +2,8 @@ FROM ruby:4.0.2-slim
 
 WORKDIR /app
 
-RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
     libyaml-dev \
@@ -13,7 +14,7 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends \
 ENV HOME=/app
 ENV BUNDLE_PATH=/app/vendor/bundle
 
-COPY Gemfile Gemfile.lock ./
+COPY .ruby-version Gemfile Gemfile.lock ./
 RUN bundle install
 
 COPY . .
