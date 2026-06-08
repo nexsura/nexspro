@@ -1,50 +1,166 @@
+# -----------------------------------------------------------------------------
 # Ruby / Rails
+# -----------------------------------------------------------------------------
 *.gem
 *.rbc
 .bundle/
 vendor/bundle/
+
+# Rails logs / tmp
 log/*
 tmp/*
 !log/.keep
 !tmp/.keep
 
-# Database
-db/*.sqlite3
-db/*.sqlite3-journal
-
-# Secrets / Env
-/config/master.key
-/config/*.key
-.env*
-
-# Docker / Dev Container
-.vscode-server/
-.devcontainer/.cache/
-.cache/
-
-# VS Code
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
-
-# Storage / uploads
+# Rails storage / uploads
 storage/*
 !storage/.keep
 
-# Assets
-public/assets
+# Rails generated assets
+public/assets/
+public/packs/
+public/packs-test/
+app/assets/builds/*
+!app/assets/builds/.keep
 
-# Debug / Logs
-*.log
-.byebug_history
+# Rails credentials / secrets
+/config/master.key
+/config/credentials/*.key
+/config/*.key
 
-# Tests / Coverage
+# Environment files
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Database
+db/*.sqlite3
+db/*.sqlite3-journal
+db/*.sqlite3-shm
+db/*.sqlite3-wal
+*.sqlite3
+*.sqlite3-journal
+
+# Dumps / backups
+*.sql
+*.dump
+*.backup
+*.bak
+*.tar
+*.tar.gz
+*.zip
+*.7z
+*.rar
+
+# -----------------------------------------------------------------------------
+# Tests / Coverage / Debug
+# -----------------------------------------------------------------------------
 coverage/
+.rspec_status
+.byebug_history
+*.log
 
-# OS
-.DS_Store
-Thumbs.db
+# Capybara / system test screenshots
+tmp/screenshots/
+tmp/capybara/
+
+# SimpleCov / test artifacts
+coverage.*
+test/reports/
+spec/reports/
+
+# -----------------------------------------------------------------------------
+# Node / Frontend tooling
+# -----------------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Keep lockfiles committed
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# -----------------------------------------------------------------------------
+# Docker / Dev Containers
+# -----------------------------------------------------------------------------
+.vscode-server/
+.devcontainer/.cache/
+.docker/
+.cache/
+
+# -----------------------------------------------------------------------------
+# Editors / IDEs
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.classpath
+.history/
+
+# Ruby editor tooling
+.ruby-lsp/
+.solargraph/
+.yardoc/
+yardoc/
+doc/
+
+# -----------------------------------------------------------------------------
+# Local machine files — NEVER commit these
+# -----------------------------------------------------------------------------
+.local/
+.config/
 .dotnet/
 .gitconfig
-/app/assets/builds/*
-!/app/assets/builds/.keep
+.git-credentials
+.gitkraken/
+GitKraken/
+.gk/
+.gem/
+.bundle/config
+
+# SSH / certificates / keys
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.pfx
+id_rsa
+id_rsa.pub
+id_ed25519
+id_ed25519.pub
+
+# -----------------------------------------------------------------------------
+# OS files
+# -----------------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# -----------------------------------------------------------------------------
+# Production / deployment sensitive local files
+# -----------------------------------------------------------------------------
+.kamal/secrets
+.kamal/*.env
+config/deploy*.local.yml
+config/database.local.yml
+config/cable.local.yml
+config/storage.local.yml
+
+# -----------------------------------------------------------------------------
+# Misc
+# -----------------------------------------------------------------------------
+*.pid
+*.seed
+*.pid.lock
