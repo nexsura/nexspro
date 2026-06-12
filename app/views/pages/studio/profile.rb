@@ -11,6 +11,9 @@ module Views
           render Views::Components::Studio::Profile::Transition.new
           render Views::Components::Studio::Profile::Method.new
           render Views::Components::Studio::Profile::Transition.new
+          render Views::Components::Studio::Profile::Skills.new
+          render Views::Components::Studio::Profile::Transition.new
+          render Views::Components::Studio::Profile::Trust.new
         end
       end
     end
