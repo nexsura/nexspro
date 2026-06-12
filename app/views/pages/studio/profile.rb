@@ -4,17 +4,13 @@ module Views
   module Pages
     module Studio
       class Profile < Views::Base
-        def page_title
-          "Profile"
-        end
+        def page_title = "Profile"
 
         def view_template
-          section id: "studio-profile",
-            class: "min-h-screen bg-(--background) px-8 py-32" do
-            h1 class: "text-(--text-title-size) font-light tracking-tight" do
-              plain "Profile"
-            end
-          end
+          render Views::Components::Studio::Profile::Identity.new
+          render Views::Components::Studio::Profile::Transition.new
+          render Views::Components::Studio::Profile::Method.new
+          render Views::Components::Studio::Profile::Transition.new
         end
       end
     end
