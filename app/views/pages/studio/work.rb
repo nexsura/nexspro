@@ -4,17 +4,14 @@ module Views
   module Pages
     module Studio
       class Work < Views::Base
-        def page_title
-          "Work"
-        end
+        def page_title = "Work"
 
         def view_template
-          section id: "studio-work",
-            class: "min-h-screen bg-(--background) px-8 py-32" do
-            h1 class: "text-(--text-title-size) font-light tracking-tight" do
-              plain "Work"
-            end
-          end
+          render Views::Components::Studio::Work::HeroBlock.new
+          render Views::Components::Studio::Work::FeaturedProjectBlock.new
+          render Views::Components::Studio::Work::ProjectIndexBlock.new
+          render Views::Components::Studio::Work::CaseStudyPreviewBlock.new
+          render Views::Components::Studio::Work::ContactBlock.new
         end
       end
     end
