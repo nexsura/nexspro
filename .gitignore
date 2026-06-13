@@ -121,6 +121,7 @@ docker-compose.override.yaml
 # -----------------------------------------------------------------------------
 /.codex/
 /.agents/
+/.copilot/
 
 /.local/
 /.config/
