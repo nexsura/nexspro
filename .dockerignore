@@ -1,0 +1,80 @@
+# Git / repository metadata
+.git
+.gitignore
+.gitattributes
+
+# Local environment and credentials
+.env
+.env.*
+!.env.example
+!.env.*.example
+config/master.key
+config/credentials/*.key
+config/*.key
+
+# Local assistants, editors, and language servers
+.agents
+.codex
+.copilot
+.devcontainer
+.idea
+.ruby-lsp
+.vscode
+.vscode-server
+
+# Local caches and dependency installs
+.bundle
+.cache
+.config
+.local
+.dotnet
+vendor/bundle
+node_modules
+
+# Runtime state
+log/*
+tmp/*
+storage/*
+!log/.keep
+!tmp/.keep
+!storage/.keep
+
+# Generated assets and reports
+app/assets/builds/*
+!app/assets/builds/.keep
+coverage
+public/assets
+brakeman.html
+brakeman.json
+bundler-audit.log
+
+# Dumps, backups, archives, and private material
+*.sql
+*.sql.gz
+*.dump
+*.pgdump
+*.backup
+*.bak
+*.pem
+*.key
+*.crt
+*.cer
+*.csr
+*.p12
+*.pfx
+*.p8
+*.jks
+*.keystore
+*.gpg
+*.age
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+*.7z
+*.rar
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
