@@ -12,7 +12,7 @@ RUN apt-get update -qq && \
     && rm -rf /var/lib/apt/lists/*
 
 ENV HOME=/app
-ENV BUNDLE_PATH=/app/vendor/bundle
+ENV BUNDLE_PATH=/usr/local/bundle
 
 COPY .ruby-version Gemfile Gemfile.lock ./
 RUN bundle install

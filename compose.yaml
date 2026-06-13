@@ -2,39 +2,39 @@ services:
   app:
     build:
       context: .
-    user: "1000:1000"
+    user: "${UID:-1000}:${GID:-1000}"
     volumes:
       - .:/app
+      - bundle:/usr/local/bundle
     ports:
-      - "3000:3000"
+      - "127.0.0.1:${PORT:-3000}:3000"
     depends_on:
-      - db
-      - redis
+      db:
+        condition: service_healthy
     environment:
       RAILS_ENV: development
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/nexspro_development
-      REDIS_URL: redis://redis:6379/0
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-nexspro_development}
+      BUNDLE_PATH: /usr/local/bundle
     stdin_open: true
     tty: true
 
   db:
     image: postgres:17
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: nexspro_development
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-nexspro_development}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
-
-  redis:
-    image: redis:8
-    volumes:
-      - redis_data:/data
-    ports:
-      - "6379:6379"
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"
 
 volumes:
+  bundle:
   postgres_data:
-  redis_data:
