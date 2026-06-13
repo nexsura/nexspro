@@ -45,25 +45,27 @@ module Views
 
           def project_line(number, title, context, description, stack)
             article class: "grid gap-6 border-b border-(--border) py-9 last:border-b-0 lg:min-h-[12rem] lg:grid-cols-12 lg:items-center lg:gap-8 lg:py-10" do
-              div class: "flex items-center gap-5 lg:col-span-2 lg:pl-8" do
-                span class: "text-[10px] font-light tracking-[0.36em] text-(--accent)" do
-                  plain number
-                end
+              div class: "lg:col-span-7" do
+                div class: "flex items-start gap-6 lg:gap-10" do
+                  span class: "shrink-0 text-[10px] font-light tracking-[0.36em] text-(--accent)" do
+                    plain number
+                  end
 
-                span class: "h-px w-8 bg-(--accent-line)", aria: { hidden: true }
+                  span class: "mt-3 h-px w-14 shrink-0 bg-(--accent-line)", aria: { hidden: true }
+
+                  div class: "min-w-0" do
+                    p class: "text-[10px] font-light uppercase tracking-[0.32em] text-(--foreground-soft)" do
+                      plain context
+                    end
+
+                    h3 class: "mt-5 text-[18px] font-light uppercase tracking-[0.28em] text-(--foreground)" do
+                      plain title
+                    end
+                  end
+                end
               end
 
-              div class: "lg:col-span-4" do
-                h3 class: "text-[18px] font-light uppercase tracking-[0.28em] text-(--foreground)" do
-                  plain title
-                end
-
-                p class: "mt-4 text-[10px] font-light uppercase tracking-[0.32em] text-(--foreground-soft)" do
-                  plain context
-                end
-              end
-
-              div class: "lg:col-span-6 lg:justify-self-end" do
+              div class: "lg:col-span-5 lg:justify-self-end" do
                 p class: "max-w-2xl text-[13px] font-light leading-7 tracking-[0.06em] text-(--foreground-soft)" do
                   plain description
                 end
