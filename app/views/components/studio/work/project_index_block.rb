@@ -11,21 +11,21 @@ module Views
               "NITROCLUB",
               "Team concept build",
               "Collaborative Rails project built in a team environment, focused on turning an idea into a structured web application with shared code, database logic, and interface work.",
-              ["Ruby on Rails", "HTML", "SCSS", "JavaScript"]
+              [ "Ruby on Rails", "HTML", "SCSS", "JavaScript" ]
             ],
             [
               "03",
               "TREMA",
               "Group Rails product",
               "Collaborative Rails application built as a group project, showing teamwork, Rails structure, database-backed features, and fullstack product development.",
-              ["Ruby on Rails", "SCSS", "HTML", "JavaScript"]
+              [ "Ruby on Rails", "SCSS", "HTML", "JavaScript" ]
             ],
             [
               "04",
               "RAILS SIMPLE AIRBNB",
               "Booking CRUD app",
               "Airbnb-style Rails application built to manage listings and bookings, with full CRUD, MVC structure, PostgreSQL, forms, and booking logic.",
-              ["Ruby on Rails", "PostgreSQL", "ERB", "Bootstrap"]
+              [ "Ruby on Rails", "PostgreSQL", "ERB", "Bootstrap" ]
             ]
           ].freeze
 
