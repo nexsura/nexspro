@@ -1,6 +1,19 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'test'
+abort('The Rails environment is running in production mode!') if ENV['RAILS_ENV'] == 'production'
+
+ENV['RAILS_ENV'] = 'test'
+
+if ENV['TEST_DATABASE_URL']
+  ENV['DATABASE_URL'] = ENV['TEST_DATABASE_URL']
+elsif ENV['DATABASE_URL']
+  require 'uri'
+
+  database_url = URI.parse(ENV['DATABASE_URL'])
+  database_url.path = database_url.path.sub(/_development\z/, '_test')
+  ENV['DATABASE_URL'] = database_url.to_s
+end
+
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
@@ -8,6 +21,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 # that will avoid rails generators crashing because migrations haven't been run yet
 # return unless Rails.env.test?
 require 'rspec/rails'
+require 'shoulda/matchers'
 # Add additional requires below this line. Rails is not loaded until this point!
 
 Shoulda::Matchers.configure do |config|
