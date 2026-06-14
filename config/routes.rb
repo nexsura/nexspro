@@ -31,4 +31,7 @@ Rails.application.routes.draw do
     get "community", to: "connect#community", as: :connect_community
     get "socials", to: "connect#socials", as: :connect_socials
   end
+
+  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
+  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 end
