@@ -62,7 +62,7 @@ jobs:
             rubocop-${{ runner.os }}-
 
       - name: Validate CI script syntax
-        run: ruby -c bin/ci
+        run: bash -n bin/ci
 
       - name: Run Rails CI
         run: bin/ci
@@ -70,7 +70,7 @@ jobs:
   docker:
     name: Docker build
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
 
     steps:
       - name: Checkout code
@@ -79,13 +79,86 @@ jobs:
       - name: Validate Compose configuration
         run: docker compose config
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
-
       - name: Build application image
-        uses: docker/build-push-action@v7
+        run: docker build --pull --tag nexspro-app:${{ github.sha }} .
+
+      - name: Scan Docker image with Trivy
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
-          context: .
-          file: ./Dockerfile
-          push: false
-          pull: true
+          image-ref: nexspro-app:${{ github.sha }}
+          format: table
+          exit-code: 1
+          ignore-unfixed: true
+          scanners: vuln
+          pkg-types: os
+          severity: CRITICAL,HIGH
+
+      - name: Build Compose app service
+        run: docker compose build app
+
+      - name: Install gems in Docker bundle volume
+        run: docker compose run --rm app bundle install
+
+      - name: Run Dockerized Rails CI
+        run: docker compose run --rm app bin/ci
+
+  gitleaks:
+    name: Gitleaks
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Scan secrets with Gitleaks
+        run: >-
+          docker run --rm
+          -v "$PWD:/repo"
+          ghcr.io/gitleaks/gitleaks:latest
+          detect
+          --source /repo
+          --no-banner
+          --redact
+          --exit-code 1
+
+  codeql:
+    name: CodeQL
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ruby
+          build-mode: none
+
+      - name: Analyze with CodeQL
+        uses: github/codeql-action/analyze@v4
+
+  semgrep:
+    name: Semgrep
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    if: github.actor != 'dependabot[bot]'
+
+    container:
+      image: semgrep/semgrep
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      - name: Scan with Semgrep CE
+        run: semgrep scan --config auto --error
