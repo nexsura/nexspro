@@ -1,36 +1,34 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
+#!/usr/bin/env bash
+set -euo pipefail
 
-require "uri"
-require "English"
+if [[ "${RAILS_ENV:-}" == "production" ]]; then
+  echo "Refusing to run CI in production." >&2
+  exit 1
+fi
 
-abort "Refusing to run CI in production." if ENV["RAILS_ENV"] == "production"
+export RAILS_ENV=test
 
-ENV["RAILS_ENV"] = "test"
+if [[ -n "${TEST_DATABASE_URL:-}" ]]; then
+  export DATABASE_URL="${TEST_DATABASE_URL}"
+elif [[ -n "${DATABASE_URL:-}" && "${DATABASE_URL}" == *_development ]]; then
+  export DATABASE_URL="${DATABASE_URL/%_development/_test}"
+fi
 
-if ENV["TEST_DATABASE_URL"]
-  ENV["DATABASE_URL"] = ENV["TEST_DATABASE_URL"]
-elsif ENV["DATABASE_URL"]
-  database_url = URI.parse(ENV["DATABASE_URL"])
-  database_url.path = database_url.path.sub(/_development\z/, "_test")
-  ENV["DATABASE_URL"] = database_url.to_s
-end
+run() {
+  echo
+  echo "==> $*"
+  "$@"
+}
 
-commands = [
-  %w[bundle check],
-  %w[bin/rails db:prepare],
-  %w[bin/rails zeitwerk:check],
-  %w[bin/rails routes],
-  %w[bin/rails tailwindcss:build],
-  %w[bin/rails assets:precompile],
-  %w[bin/rubocop],
-  %w[bin/brakeman --no-pager],
-  %w[bin/bundler-audit check --update],
-  %w[bin/rspec],
-  %w[bin/rails db:seed:replant]
-]
-
-commands.each do |command|
-  puts "\n==> #{command.join(' ')}"
-  system(*command) || exit($CHILD_STATUS.exitstatus || 1)
-end
+run bundle check
+run bin/rails db:prepare
+run bin/rails zeitwerk:check
+run bin/rails routes
+run bin/rails runner "abort('Pending migrations') if ActiveRecord::Base.connection_pool.migration_context.needs_migration?"
+run bin/rails tailwindcss:build
+run bundle exec rspec
+run bin/rails assets:precompile
+run bin/rubocop
+run bin/brakeman --no-pager
+run bin/bundler-audit check --update
+run bin/rails db:seed:replant

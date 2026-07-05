@@ -1,12 +1,79 @@
 version: 2
 updates:
-- package-ecosystem: bundler
-  directory: "/"
-  schedule:
-    interval: weekly
-  open-pull-requests-limit: 10
-- package-ecosystem: github-actions
-  directory: "/"
-  schedule:
-    interval: weekly
-  open-pull-requests-limit: 10
+  - package-ecosystem: bundler
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Europe/Paris
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - ruby
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      rails:
+        patterns:
+          - rails
+          - railties
+          - action*
+          - active*
+      test-and-quality:
+        patterns:
+          - rspec*
+          - rubocop*
+          - brakeman
+          - bundler-audit
+          - capybara
+          - selenium-webdriver
+          - shoulda-matchers
+          - simplecov*
+      rails-infrastructure:
+        patterns:
+          - solid_*
+          - pg
+          - puma
+          - bootsnap
+      frontend-assets:
+        patterns:
+          - phlex*
+          - propshaft
+          - tailwindcss*
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:15"
+      timezone: Europe/Paris
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+
+  - package-ecosystem: docker
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:30"
+      timezone: Europe/Paris
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - docker
+    commit-message:
+      prefix: "chore(deps)"
+    groups:
+      docker:
+        patterns:
+          - "*"

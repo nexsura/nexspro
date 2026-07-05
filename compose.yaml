@@ -14,6 +14,10 @@ services:
       RAILS_ENV: development
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-nexspro_development}
       BUNDLE_PATH: /bundle
+      BUNDLE_USER_HOME: /bundle
+      BUNDLE_APP_CONFIG: /bundle/config
+      GEM_HOME: /bundle
+      XDG_DATA_HOME: /bundle/xdg
     stdin_open: true
     tty: true
 
