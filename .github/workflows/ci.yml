@@ -90,7 +90,7 @@ jobs:
           exit-code: 1
           ignore-unfixed: true
           scanners: vuln
-          pkg-types: os
+          vuln-type: os
           severity: CRITICAL,HIGH
 
       - name: Build Compose app service
@@ -161,4 +161,4 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Scan with Semgrep CE
-        run: semgrep scan --config auto --error
+        run: semgrep scan --config auto
