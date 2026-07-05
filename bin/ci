@@ -25,8 +25,8 @@ run bin/rails db:prepare
 run bin/rails zeitwerk:check
 run bin/rails routes
 run bin/rails runner "abort('Pending migrations') if ActiveRecord::Base.connection_pool.migration_context.needs_migration?"
-run bundle exec rspec
 run bin/rails tailwindcss:build
+run bundle exec rspec
 run bin/rails assets:precompile
 run bin/rubocop
 run bin/brakeman --no-pager
