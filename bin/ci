@@ -17,12 +17,17 @@ elsif ENV["DATABASE_URL"]
 end
 
 commands = [
+  %w[bundle check],
   %w[bin/rails db:prepare],
   %w[bin/rails zeitwerk:check],
-  %w[bundle exec rubocop],
-  %w[bundle exec brakeman --no-pager],
-  %w[bundle exec bundle-audit check --update],
-  %w[bin/rspec]
+  %w[bin/rails routes],
+  %w[bin/rails tailwindcss:build],
+  %w[bin/rails assets:precompile],
+  %w[bin/rubocop],
+  %w[bin/brakeman --no-pager],
+  %w[bin/bundler-audit check --update],
+  %w[bin/rspec],
+  %w[bin/rails db:seed:replant]
 ]
 
 commands.each do |command|

@@ -11,14 +11,14 @@ RUN apt-get update -qq && \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-ENV HOME=/app
-ENV BUNDLE_PATH=/usr/local/bundle
-ARG UID=1000
-ARG GID=1000
+ENV BUNDLE_PATH=/bundle
+ENV BUNDLE_BIN=/bundle/bin
+ENV GEM_HOME=/bundle
+ENV PATH="/bundle/bin:${PATH}"
 
 COPY .ruby-version Gemfile Gemfile.lock ./
-RUN bundle install && \
-    chown -R "${UID}:${GID}" "${BUNDLE_PATH}"
+
+RUN bundle install
 
 COPY . .
 
