@@ -2,13 +2,9 @@ services:
   app:
     build:
       context: .
-      args:
-        UID: "${UID:-1000}"
-        GID: "${GID:-1000}"
-    user: "${UID:-1000}:${GID:-1000}"
     volumes:
       - .:/app
-      - bundle:/usr/local/bundle
+      - bundle:/bundle
     ports:
       - "127.0.0.1:${PORT:-3000}:3000"
     depends_on:
@@ -17,7 +13,7 @@ services:
     environment:
       RAILS_ENV: development
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-nexspro_development}
-      BUNDLE_PATH: /usr/local/bundle
+      BUNDLE_PATH: /bundle
     stdin_open: true
     tty: true
 
@@ -28,7 +24,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
       POSTGRES_DB: ${POSTGRES_DB:-nexspro_development}
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      test: [ "CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\"" ]
       interval: 5s
       timeout: 5s
       retries: 10

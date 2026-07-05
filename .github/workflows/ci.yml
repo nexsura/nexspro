@@ -74,9 +74,6 @@ jobs:
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/nexspro_test
 
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y libpq-dev
-
       - name: Checkout code
         uses: actions/checkout@v6
 
