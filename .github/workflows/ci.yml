@@ -1,4 +1,4 @@
-name: CI
+name: Checks
 
 on:
   pull_request:
@@ -18,8 +18,67 @@ defaults:
     shell: bash
 
 jobs:
+  actionlint:
+    name: Actionlint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Lint workflows
+        run: >-
+          docker run --rm
+          -v "$PWD:/repo"
+          --workdir /repo
+          rhysd/actionlint:latest
+          -color
+
+  hadolint:
+    name: Hadolint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Lint Dockerfile
+        run: >-
+          docker run --rm
+          -i
+          ghcr.io/hadolint/hadolint
+          hadolint
+          --ignore DL3005
+          --ignore DL3008
+          -
+          < Dockerfile
+
+  assets:
+    name: Assets
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      RAILS_ENV: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Build assets
+        run: |
+          bin/rails tailwindcss:build
+          bin/rails assets:precompile
+
   rails:
-    name: Rails quality gate
+    name: Rails
     runs-on: ubuntu-latest
     timeout-minutes: 20
 
@@ -67,8 +126,25 @@ jobs:
       - name: Run Rails CI
         run: bin/ci
 
+      - name: Smoke
+        run: |
+          bin/rails server -b 127.0.0.1 -p 3000 &
+          server_pid="$!"
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+
+          for _ in {1..30}; do
+            if curl -fsS http://127.0.0.1:3000/up >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          curl -fsS http://127.0.0.1:3000/up >/dev/null
+          curl -fsS http://127.0.0.1:3000/ >/tmp/nexspro-home.html
+          test -s /tmp/nexspro-home.html
+
   docker:
-    name: Docker build
+    name: Docker
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -103,7 +179,7 @@ jobs:
         run: docker compose run --rm app bin/ci
 
   gitleaks:
-    name: Gitleaks
+    name: Secrets
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
