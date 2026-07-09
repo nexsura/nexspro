@@ -126,7 +126,46 @@ jobs:
       - name: Run Rails CI
         run: bin/ci
 
-      - name: Smoke
+  smoke:
+    name: Smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: nexspro_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U postgres -d nexspro_test"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    env:
+      RAILS_ENV: test
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/nexspro_test
+      TEST_DATABASE_URL: postgres://postgres:postgres@localhost:5432/nexspro_test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+
+      - name: Prepare app
+        run: |
+          bin/rails db:prepare
+          bin/rails tailwindcss:build
+
+      - name: Start and probe
         run: |
           bin/rails server -b 127.0.0.1 -p 3000 &
           server_pid="$!"
@@ -142,6 +181,42 @@ jobs:
           curl -fsS http://127.0.0.1:3000/up >/dev/null
           curl -fsS http://127.0.0.1:3000/ >/tmp/nexspro-home.html
           test -s /tmp/nexspro-home.html
+
+  docker-smoke:
+    name: Docker Smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Build app
+        run: docker compose build app
+
+      - name: Install gems
+        run: docker compose run --rm app bundle install
+
+      - name: Prepare app
+        run: |
+          docker compose run --rm app bin/rails db:prepare
+          docker compose run --rm app bin/rails tailwindcss:build
+
+      - name: Start and probe
+        run: |
+          docker compose up --detach app
+          trap 'docker compose down --remove-orphans' EXIT
+
+          for _ in {1..30}; do
+            if curl -fsS http://127.0.0.1:3000/up >/dev/null; then
+              break
+            fi
+            sleep 1
+          done
+
+          curl -fsS http://127.0.0.1:3000/up >/dev/null
+          curl -fsS http://127.0.0.1:3000/ >/tmp/nexspro-docker-home.html
+          test -s /tmp/nexspro-docker-home.html
 
   docker:
     name: Docker
