@@ -7,7 +7,7 @@ gem "puma", "~> 8.0"
 
 gem "phlex-rails", "~> 2.4"
 gem "propshaft", "~> 1.3"
-gem "tailwindcss-rails", "~> 4.4"
+gem "tailwindcss-rails", "~> 4.6"
 
 gem "solid_cache", "~> 1.0"
 gem "solid_queue", "~> 1.4"
