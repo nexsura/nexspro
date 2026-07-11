@@ -5,7 +5,7 @@ module Views
     module Home
       class Hero < Views::Components::Base
         def view_template
-          section class: "relative min-h-screen overflow-hidden bg-(--background)" do
+          section class: "relative min-h-screen snap-start overflow-hidden bg-(--background)" do
             div class: "flex min-h-screen items-center justify-center -translate-y-8" do
               h1 class: "hero select-none cursor-default text-[clamp(5rem,12vw,10rem)] font-light tracking-[0.22em]" do
                 "NEXSPRO"

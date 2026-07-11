@@ -1,0 +1,31 @@
+<svg width="760" height="540" viewBox="0 0 760 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- laptop screen -->
+  <rect x="150" y="110" width="460" height="270" rx="24" stroke="#58E1D4" stroke-opacity="0.72" stroke-width="2.2"></rect>
+
+  <!-- inner screen -->
+  <rect x="182" y="142" width="396" height="206" rx="12" stroke="#58E1D4" stroke-opacity="0.24" stroke-width="1.4"></rect>
+
+  <!-- code symbol -->
+  <text x="380" y="256" text-anchor="middle" fill="#58E1D4" fill-opacity="0.9" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace" font-size="58" letter-spacing="10">&lt; / &gt;</text>
+
+  <!-- screen lines -->
+  <line x1="214" y1="304" x2="546" y2="304" stroke="#58E1D4" stroke-opacity="0.2" stroke-width="1.2"></line>
+
+  <line x1="214" y1="326" x2="474" y2="326" stroke="#58E1D4" stroke-opacity="0.16" stroke-width="1.2"></line>
+
+  <!-- small interface blocks -->
+  <rect x="214" y="214" width="74" height="28" rx="7" stroke="#58E1D4" stroke-opacity="0.24"></rect>
+
+  <rect x="304" y="214" width="74" height="28" rx="7" stroke="#58E1D4" stroke-opacity="0.24"></rect>
+
+  <rect x="394" y="214" width="74" height="28" rx="7" stroke="#58E1D4" stroke-opacity="0.24"></rect>
+
+  <!-- laptop base -->
+  <path d="M104 430H656L606 390H154L104 430Z" stroke="#58E1D4" stroke-opacity="0.66" stroke-width="2" stroke-linejoin="round"></path>
+
+  <!-- trackpad -->
+  <path d="M316 390H444L462 406H298L316 390Z" stroke="#58E1D4" stroke-opacity="0.3" stroke-width="1.2" stroke-linejoin="round"></path>
+
+  <!-- bottom line -->
+  <line x1="156" y1="462" x2="604" y2="462" stroke="#58E1D4" stroke-opacity="0.46"></line>
+</svg>
