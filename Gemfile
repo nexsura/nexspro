@@ -24,7 +24,7 @@ group :development, :test do
 end
 
 group :development do
-  gem "ruby-lsp", "~> 0.26.9"
+  gem "ruby-lsp", "~> 0.26.10"
   gem "web-console", "~> 4.3"
 end
 
