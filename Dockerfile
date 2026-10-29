@@ -1,4 +1,4 @@
-FROM ruby:4.0.5-slim
+FROM ruby:4.0.9-slim
 
 WORKDIR /app
 
@@ -21,6 +21,8 @@ ENV XDG_DATA_HOME=/bundle/xdg
 ENV PATH="/bundle/bin:${PATH}"
 
 COPY .ruby-version Gemfile Gemfile.lock ./
+
+RUN BUNDLE_FROZEN=true bundle install --jobs 4 --retry 3
 
 COPY . .
 

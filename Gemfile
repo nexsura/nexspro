@@ -1,39 +1,47 @@
+
 source "https://rubygems.org"
+
 ruby ">= 4.0.2", "< 4.1.0"
 
-gem "rails", "~> 8.1.3"
-gem "pg", "~> 1.1"
-gem "puma", "~> 8.0"
+# Rails
+gem "rails"
+gem "pg"
+gem "puma"
 
-gem "phlex-rails", "~> 2.4"
-gem "propshaft", "~> 1.3"
-gem "tailwindcss-rails", "~> 4.6"
+# Frontend
+gem "phlex-rails"
+gem "propshaft"
+gem "tailwindcss-rails"
 
-gem "solid_cache", "~> 1.0"
-gem "solid_queue", "~> 1.4"
-gem "solid_cable", "~> 4.0"
+# Rails infrastructure
+gem "solid_cache"
+gem "solid_queue"
+gem "solid_cable"
 
-gem "bootsnap", "~> 1.24", require: false
+# Performance
+gem "bootsnap", require: false
 
+# Development and testing
 group :development, :test do
-  gem "debug", "~> 1.11", platforms: %i[ mri windows ], require: "debug/prelude"
-  gem "brakeman", "~> 8.0", require: false
-  gem "bundler-audit", "~> 0.9", require: false
-  gem "rspec-rails", "~> 8.0"
-  gem "rubocop-rails-omakase", "~> 1.1", require: false
+  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "brakeman", require: false
+  gem "bundler-audit", require: false
+  gem "rspec-rails"
+  gem "rubocop-rails-omakase", require: false
 end
 
+# Development
 group :development do
-  gem "ruby-lsp", "~> 0.26.9"
-  gem "web-console", "~> 4.3"
+  gem "ruby-lsp"
+  gem "web-console"
 end
 
-# Test tools
+# Testing
 group :test do
-  gem "capybara", "~> 3.40"
-  gem "factory_bot_rails", "~> 6.5"
-  gem "selenium-webdriver", "~> 4.45"
-  gem "shoulda-matchers", "~> 8.0"
+  gem "capybara"
+  gem "factory_bot_rails"
+  gem "selenium-webdriver"
+  gem "shoulda-matchers"
   gem "simplecov", require: false
   gem "rspec_junit_formatter", require: false
 end
