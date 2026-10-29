@@ -22,6 +22,8 @@ ENV PATH="/bundle/bin:${PATH}"
 
 COPY .ruby-version Gemfile Gemfile.lock ./
 
+RUN BUNDLE_FROZEN=true bundle install --jobs 4 --retry 3
+
 COPY . .
 
 EXPOSE 3000
